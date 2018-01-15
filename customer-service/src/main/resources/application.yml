@@ -1,22 +1,50 @@
 server:
   port: 9098
+  ssl:
+    client-auth: need
+    enabled: true
+#    key-store: classpath:server-nonprod.jks
+#    key-store-password: changeme
+#    key-password: changeme
+#    trust-store: classpath:server-nonprod.jks
+#    trust-store-password: changeme
 
-eureka:
-  instance:
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2
-  client:
-    serviceUrl:
-      defaultZone: http://127.0.0.1:8761/eureka/
-    healthcheck:
-      enabled: true
-    lease:
-      duration: 5
+
+
+#eureka:
+#  instance:
+#    leaseRenewalIntervalInSeconds: 1
+#    leaseExpirationDurationInSeconds: 2
+#  client:
+#    serviceUrl:
+#      defaultZone: http://127.0.0.1:8761/eureka/
+#    healthcheck:
+#      enabled: true
+#    lease:
+#      duration: 5
 
 spring:
   application:
     name: customer-service
+  cloud:
+    services:
+      registrationMethod: direct
+
 
 logging:
   level:
     org.exampledriven.eureka: DEBUG
+    org.springframework: DEBUG
+
+security:
+  basic:
+    enabled: false
+
+management:
+  security:
+    enabled: false
+
+mtls:
+  admin-client-ids: Client
+
+

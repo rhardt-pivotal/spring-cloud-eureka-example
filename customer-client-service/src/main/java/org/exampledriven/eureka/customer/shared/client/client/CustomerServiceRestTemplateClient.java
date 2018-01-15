@@ -17,7 +17,7 @@ public class CustomerServiceRestTemplateClient {
     public MessageWrapper<Customer> getCustomer(int id) {
 
         Customer customer = restTemplate.exchange(
-                "http://customer-service/customer/{id}",
+                "https://customer-service/customer/{id}",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<Customer>() {
@@ -27,5 +27,33 @@ public class CustomerServiceRestTemplateClient {
         return new MessageWrapper<>(customer, "server called using eureka with rest template");
 
     }
+
+    public MessageWrapper<Customer> getUserAuthCustomer() {
+
+        Customer customer = restTemplate.exchange(
+                "https://customer-service/user",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<Customer>() {
+                }).getBody();
+
+        return new MessageWrapper<>(customer, "server called using eureka with rest template - for USER");
+
+    }
+
+    public MessageWrapper<Customer> getAdminAuthCustomer() {
+
+        Customer customer = restTemplate.exchange(
+                "https://customer-service/admin",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<Customer>() {
+                }).getBody();
+
+        return new MessageWrapper<>(customer, "server called using eureka with rest template - for ADMIN");
+
+    }
+
+
 
 }

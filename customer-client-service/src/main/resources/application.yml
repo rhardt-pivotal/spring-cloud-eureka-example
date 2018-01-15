@@ -18,3 +18,10 @@ logging:
   level:
     org.exampledriven.eureka.customer.shared.CustomerServiceFeignClient: FULL
     org.exampledriven.eureka: DEBUG
+security:
+  basic:
+    enabled: false
+management:
+  security:
+    enabled: false
+

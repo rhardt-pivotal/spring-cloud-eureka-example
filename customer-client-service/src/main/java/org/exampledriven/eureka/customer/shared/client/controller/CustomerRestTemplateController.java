@@ -26,4 +26,23 @@ public class CustomerRestTemplateController {
 
     }
 
+    @RequestMapping(value = "/customer-client-user", method = RequestMethod.GET, produces = "application/json")
+    public MessageWrapper getUser() {
+
+        logger.debug("Reading user-level using rest template");
+
+        return customerServiceRestTemplateClient.getUserAuthCustomer();
+
+    }
+
+    @RequestMapping(value = "/customer-client-admin", method = RequestMethod.GET, produces = "application/json")
+    public MessageWrapper getAdmin() {
+
+        logger.debug("Reading admin-level using rest template");
+
+        return customerServiceRestTemplateClient.getAdminAuthCustomer();
+
+    }
+
+
 }
