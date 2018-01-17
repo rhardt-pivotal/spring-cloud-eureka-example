@@ -13,8 +13,8 @@ import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 
 
-//@Configuration
-//@Import(EmbeddedServletContainerAutoConfiguration.BeanPostProcessorsRegistrar.class)
+@Configuration
+@Import(EmbeddedServletContainerAutoConfiguration.BeanPostProcessorsRegistrar.class)
 public class EmbeddedTomcatConfig {
 
     @Bean

@@ -26,6 +26,14 @@ public class CFContainerJSSEUtil extends JSSEUtil {
         ks.load(null, null);
         kmf.init(ks, new char[]{});
         KeyManager[] ret = kmf.getKeyManagers();
+        logger.info("***** MY KMS: {} ", ret.length);
+        if (ret.length > 0) {
+            for (int i = 0 ; i < ret.length ; i++) {
+                logger.info("KM - {}", ret[i]);
+            }
+        }
+
+
         return ret;
         //return super.getKeyManagers();
     }
@@ -34,9 +42,11 @@ public class CFContainerJSSEUtil extends JSSEUtil {
     public TrustManager[] getTrustManagers() throws Exception {
         TrustManagerFactory tmf =
                 TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-        KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-        ks.load(null, null);
-        tmf.init(ks);
+
+
+        //KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
+        //ks.load(null, null);
+        tmf.init((KeyStore) null);
         TrustManager[] ret = tmf.getTrustManagers();
 
         logger.info("***** MY TMS: {} ", ret.length);

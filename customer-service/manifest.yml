@@ -10,5 +10,5 @@ applications:
   - robreka
   env:
     TRUST_CERTS: api.sys.oxnard.cf-app.com
-    JAVA_OPTS: -Dlogging.level.org.springframework=DEBUG -Dlogging.level.org.apache=WARN -Djavax.net.debug=all
-    JBP_CONFIG_DEBUG: '{enabled: false}'
+    JAVA_OPTS: -Dlogging.level.org.springframework=DEBUG -Dlogging.level.org.apache=WARN -Djavax.net.debug=all -Djavax.net.ssl.trustStore=$PWD/BOOT-INF/classes/client-nonprod.jks -Djavax.net.ssl.trustStorePassword=changeme -Djavax.net.ssl.trustStoreType=JKS
+    JBP_CONFIG_DEBUG: '{enabled: true}'
