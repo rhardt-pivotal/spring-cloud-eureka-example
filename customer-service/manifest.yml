@@ -3,12 +3,11 @@ memory: 1G
 instances: 1
 applications:
 - name: customer-service
-  host: customer-service-rob
+  no-route: true
   path: target/customer-service-0.0.1-SNAPSHOT.jar
-  buildpack: https://github.com/cloudfoundry/java-buildpack
+  buildpack: java_buildpack_offline
   services:
-  - robreka
+  - demo-eureka
   env:
-    TRUST_CERTS: api.sys.oxnard.cf-app.com
-    JAVA_OPTS: -Dlogging.level.org.springframework=DEBUG -Dlogging.level.org.apache=WARN -Djavax.net.debug=all -Djavax.net.ssl.trustStore=$PWD/BOOT-INF/classes/client-nonprod.jks -Djavax.net.ssl.trustStorePassword=changeme -Djavax.net.ssl.trustStoreType=JKS
-    JBP_CONFIG_DEBUG: '{enabled: true}'
+    TRUST_CERTS: api.sys.santee.cf-app.com
+

@@ -34,7 +34,6 @@ spring:
 logging:
   level:
     org.exampledriven.eureka: DEBUG
-    org.springframework: DEBUG
 
 security:
   basic:

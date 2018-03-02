@@ -30,7 +30,6 @@ public class Config extends WebSecurityConfigurerAdapter{
     public Config(@Value("${mtls.admin-client-ids}") List<String> adminClientIds) {
         this.adminClientIds = adminClientIds.stream()
                 .map(clientId -> String.format("app:%s", clientId))
-                //.map(clientId -> String.format("%s", clientId))
                 .collect(Collectors.toList());
     }
 

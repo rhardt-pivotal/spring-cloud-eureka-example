@@ -1,6 +1,7 @@
 package org.exampledriven.eureka.customer.shared.client;
 
 import org.apache.http.client.HttpClient;
+import org.apache.http.conn.ssl.DefaultHostnameVerifier;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.HttpClients;
@@ -36,7 +37,7 @@ public class Config {
         SSLContext sslcontext =
                 SSLContexts.createSystemDefault();
         SSLConnectionSocketFactory sslConnectionSocketFactory =
-                new SSLConnectionSocketFactory(sslcontext, new NoopHostnameVerifier());
+                new SSLConnectionSocketFactory(sslcontext, new DefaultHostnameVerifier());
         return HttpClients.custom().setSSLSocketFactory(sslConnectionSocketFactory).build();
     }
 

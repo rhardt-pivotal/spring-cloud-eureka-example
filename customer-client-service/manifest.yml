@@ -3,12 +3,11 @@ memory: 1G
 instances: 1
 applications:
 - name: customer-client-service
-  host: customer-client-service-rob
+  host: customer-client-service
   path: target/customer-client-service-0.0.1-SNAPSHOT.jar
-  buildpack: https://github.com/cloudfoundry/java-buildpack
+  buildpack: java_buildpack_offline
   services:
-  - robreka
+  - demo-eureka
   env:
-    TRUST_CERTS: api.sys.oxnard.cf-app.com
-    JAVA_OPTS: -Dlogging.level.org.springframework=DEBUG -Dlogging.level.org.apache=WARN -Djavax.net.debug=all
+    TRUST_CERTS: api.sys.santee.cf-app.com
 

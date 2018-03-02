@@ -1,35 +1,38 @@
-[![Build Status](https://travis-ci.org/ExampleDriven/spring-cloud-eureka-example.svg)](https://travis-ci.org/ExampleDriven/spring-cloud-eureka-example)
+# spring-cloud-eureka-mtls-example
 
-# spring-cloud-eureka-example
+This is code shamelessly stolen from:
 
-This is the source code for the blog post
+https://github.com/nebhale/mtls-sample
+... and ...
+https://github.com/ExampleDriven/spring-cloud-eureka-example
 
-https://exampledriven.wordpress.com/2016/07/01/spring-cloud-eureka-ribbon-feign-example/
+I've munged the two of them together to show how you can... 
+- deploy a service to Cloud Foundry with no public route
+- have that service listen for SSL connections on 8080 (to make Cloud Foundry happy)
+- bind it to Eureka
+- deploy a client to the same CF space, and bind it to the same Eureka service
+- have the client call the service using CF c2c networking, presenting a certificate for mTLS
+- have the client validate the server's certificate and vice versa
+- map the client app's cf-assigned guid to roles in the server
+- do the whole thing using the CF-provided 'container-identity' certificates.
 
-This example covers the following :
+        cf create-service p-service-registry standard demo-eureka    
+        cf push -f ./customer-service/manifest.yml #notice the no-route: true in the manifest
+        cf push -f ./customer-client-service/manifest.yml
+        cf add-network-policy customer-client-service --destination-app customer-service
+        
+        
+then you can try these uris:
+https://customer-client-service.your.cf.apps.domain/customer-client/1
+https://customer-client-service.your.cf.apps.domain/customer-client-user
+https://customer-client-service.your.cf.apps.domain/customer-client-admin
 
-- Eureka server
-- Ribbon with rest template
-- Feign client
-  - Hystrix fallback
-  - Inheritance
+the last one should throw an error because the *customer-service* app doesn't recognize the *customer-client-service* app as having the _admin_ role.
 
-To run this project
-
-    mvn clean install
-
-then execute
-
-    mvn spring-boot:run
-
-in the all the below directories in the following order
-- eureka-server
-- customer-service
-- customer-client-service
-
-Test URLs :
-
-- Rest template example : http://localhost:9099/customer-client/1
-- Feign example : http://localhost:9099/customer-client-feign/1
-- Feign example with Hystrix fallback: http://localhost:9099/customer-client-feign/8
-- Eureka server : http://localhost:8761/
+        cf app customer-client-service --guid
+        *copy the guid*
+        cf set-env customer-service MTLS_ADMIN-CLIENT-IDS <guid>
+        cf restage customer-service
+        
+now the 3rd URL should return successfully. 
+        

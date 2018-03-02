@@ -29,7 +29,8 @@ public class Application {
             SSLContext sslContext = SSLContext.getInstance("TLS");
             TrustManagerFactory tmf = TrustManagerFactory.getInstance("PKIX", "SunJSSE");
             KeyStore ks = KeyStore.getInstance("JKS");
-            InputStream is = new FileInputStream("/home/vcap/app/BOOT-INF/classes/server-nonprod.jks");
+            //InputStream is = new FileInputStream("/home/vcap/app/BOOT-INF/classes/server-nonprod.jks");
+            InputStream is = new FileInputStream("/Users/rhardt/work/client/TMobile/security_container_artifacts/server-nonprod.jks");
             ks.load(is, "changeme".toCharArray());
             tmf.init(ks);
 
