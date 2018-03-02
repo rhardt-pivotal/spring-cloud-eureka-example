@@ -23,9 +23,9 @@ I've munged the two of them together to show how you can...
         
         
 then you can try these uris:
-https://customer-client-service.your.cf.apps.domain/customer-client/1
-https://customer-client-service.your.cf.apps.domain/customer-client-user
-https://customer-client-service.your.cf.apps.domain/customer-client-admin
+- https://customer-client-service.your.cf.apps.domain/customer-client/1
+- https://customer-client-service.your.cf.apps.domain/customer-client-user
+- https://customer-client-service.your.cf.apps.domain/customer-client-admin
 
 the last one should throw an error because the *customer-service* app doesn't recognize the *customer-client-service* app as having the _admin_ role.
 
